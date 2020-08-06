@@ -1,0 +1,55 @@
+<%- include("../../partials/header.ejs") %> 
+<body>
+    <%- include("../../partials/navbar.ejs") %> 
+    <div class="container">
+        <hr>
+        <h2>Categorias</h2>
+        <a class="btn btn-success" href="/admin/articles/new">Criar novo artigo</a>
+        <hr>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Título</th>
+                    <th>Slug</th>
+                    <th>Categoria</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% articles.forEach(article => { %>
+                    <tr>
+
+                        <th><%= article.id %></th>
+                        <th><%= article.title %></th>
+                        <th><%= article.slug %></th>
+                        <!-- IMPORTANTE -->
+                        <!-- Para pegar o texto do relacionamento basta seguir o código abaixo -->
+                        <th><%= article.tblCategorium.title %> </th> 
+                        <th>
+                            <a href="/admin/articles/edit/<%= article.id %>" class="btn btn-warning">Edita</a>
+                            <form action="/articles/delete" method="post" style="display: inline;" onsubmit="confirmarDeletar(event, this)">
+                                <input type="hidden" name="id" value="<%= article.id %>">
+                                <button class="btn btn-danger">Excluir</button>
+                            </form>
+                        </th>
+                    </tr> 
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+<%- include("../../partials/footer.ejs") %> 
+<script>
+
+    function confirmarDeletar(event, formulario) {
+        
+        event.preventDefault();
+
+        const decisionDelete = confirm("Deseja deletar esse registro?");
+
+        decisionDelete? formulario.submit():"";
+
+    }
+
+</script>

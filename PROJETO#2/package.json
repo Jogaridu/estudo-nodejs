@@ -1,0 +1,22 @@
+{
+  "name": "blogprogramacao",
+  "version": "1.0.0",
+  "description": "Blog desevolvido em nodeJS com MySQL e com o CRUD completo: Iniciado em 30-07-2020",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jorge Gabriel Ricci Dutra",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "ejs": "^3.1.3",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "mysql2": "^2.1.0",
+    "sequelize": "^6.3.3",
+    "slugify": "^1.4.5"
+  }
+}

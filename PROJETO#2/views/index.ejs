@@ -1,0 +1,44 @@
+<%- include ("partials/header.ejs") %>
+
+<body>
+    <%- include("partials/homenavbar.ejs") %> 
+    <div class="container">
+        <hr>
+        <div class="jumbotron">
+            <h1 class="display-4">Bem vindo</h1>
+            <p class="lead">Blog do programador desenvolvido em NodeJS</p>
+            <hr class="my-4">
+            <p>Blog desenvolvido por Jorge Gabriel Ricci Dutra, aplicando todos os conhecimentos em NodeJS e MySQL.</p>
+            <p>Além também de utilizar várias bibliotecas do node para facilitar o desenvolvimento</p>
+            <hr>
+            <p>Logue no sistema para acessar mais funcionalidades</p>
+            <a class="btn btn-success btn-lg" href="/login" role="button">Logar</a>
+          </div>
+        <hr>
+
+        <% articles.forEach(article => { %>
+            <div class="card">
+
+                <div class="card-header">
+                    <h2><%= article.title %></h2>
+                </div>
+
+                <div class="card-body">
+                    <a href="/<%= article.slug %>" class="btn btn-primary">Ler artigo</a>
+                </div>
+                 
+            </div>
+            <br>
+        <% }) %>
+
+        <div class="row">
+            <div class="col col-12">
+                <a style="float: right;" href="/articles/page/2">Próximo >>></a>
+            </div>
+            <hr>
+        </div>
+        <hr>
+    </div>
+</body>
+
+<%- include ("partials/footer.ejs") %>
