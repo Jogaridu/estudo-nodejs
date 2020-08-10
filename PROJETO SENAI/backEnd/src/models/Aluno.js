@@ -1,0 +1,22 @@
+const { Sequelize, DataTypes, Model } = require('sequelize');
+//const sequelize = new Sequelize('sqlite::memory');
+
+class Aluno extends Model {
+
+    static init(sequelize) {
+        super.init({
+            ra: DataTypes.STRING,
+            nome: DataTypes.STRING,
+            email: DataTypes.STRING,
+            senha: DataTypes.STRING
+        },{sequelize,})
+
+        
+    };
+
+    static associate(models) {
+        this.hasMany(models.postagens, {foreignKey: "created_aluno_id"})
+    }
+}
+
+module.exports = Aluno;
