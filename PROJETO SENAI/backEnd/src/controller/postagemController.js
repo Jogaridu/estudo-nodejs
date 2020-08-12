@@ -1,32 +1,29 @@
 const Postagem = require("./../models/Postagem");
 const {Op} = require("sequelize");
 
+
 module.exports = {
-    // lista todos os alunos
+    // lista todos as postagens
     async index(req, res) {
+        
+        const postagens = await Postagem.findAll({
+            order: [["created_at", "DESC"]],
+            include: {
+                association: "Aluno",
+                attributes: ["id", "nome", "ra"]
+            }
+        });
 
-        const alunos = await Postagem.findAll();
-
-        res.send(alunos);
+        res.send(postagens);
+        
     },
 
     async buscarPorId(req, res) {
 
-        const idAluno = req.params.id;
-
-        const aluno = await Postagem.findByPk(idAluno, {raw: true});
-
-        if (!aluno) { 
-            res.send("Erro ao buscar aluno");    
-
-        }
         
-        delete aluno.senha;
-
-        res.send(aluno);
     },
 
-    // insere aluno no banco
+    // insere postagem no banco
     async store(req, res) {
 
         const token = req.headers.authorization;
@@ -35,19 +32,34 @@ module.exports = {
 
         const {titulo, descricao, imagem, gists} = req.body;
 
-        let post = await Postagem.create({
-            titulo,
-            descricao,
-            imagem,
-            gists,
-            created_aluno_id
-        });
+        try {
+            
+            const aluno = Aluno.findByPk(created_aluno_id);
 
-        res.status(201).send(post);
+            if (!aluno) {
+                res.status(404).send("Aluno não encontrado!");
+            }
+
+            let post = await aluno.createPostagem({
+                titulo,
+                descricao,
+                imagem,
+                gists,
+                created_aluno_id
+            });
+
+            res.status(201).send(post);
+            
+        } catch (error) {
+            return res
+            .status(500)
+            .send({error: "Não foi possível adicionar postagem, tente novamento mais tarde!"})
+        }
 
     },
 
     update() {},
+    
     async delete(req, res) {
         const token = req.headers.authorization;
 
@@ -67,7 +79,7 @@ module.exports = {
 
         await postagem.destroy();
 
-        res.status(204).send()
+        res.status(204).send();
     }
     
 }

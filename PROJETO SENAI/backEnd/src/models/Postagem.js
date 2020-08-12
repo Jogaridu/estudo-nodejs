@@ -9,13 +9,14 @@ class Postagem extends Model {
             descricao: DataTypes.TEXT,
             imagem: DataTypes.STRING,
             gists: DataTypes.TEXT
-        },{sequelize, modelName: "postagens"})
+        },{sequelize, tableName: "postagens"})
 
         
     };
 
     static associate(models) {
-        this.belongsTo(models.Aluno, {foreignKey: "created_aluno_id"})
+        this.belongsTo(models.Aluno, {foreignKey: "created_aluno_id"});
+        this.hasMany(models.Comentario);
     }
 }
 
