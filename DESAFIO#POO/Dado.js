@@ -3,6 +3,7 @@ class Dado {
         this.numeroFace = numFace;
     }
 
+    // Rola o dado retornando um número aleátorio
     rolar() {
 
         const faceEscolhida = Math.floor(Math.random() * this.numeroFace);
