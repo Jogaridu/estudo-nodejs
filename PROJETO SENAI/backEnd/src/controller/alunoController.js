@@ -1,5 +1,8 @@
 const Aluno = require("./../models/Aluno");
 const {Op} = require("sequelize");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const authConfig = require("./../config/auth.json");
 
 module.exports = {
     // lista todos os alunos
@@ -44,9 +47,24 @@ module.exports = {
             return res.status(400).send("Aluno ja cadastrado");
         }
 
-        alunoCriado = await Aluno.create(aluno)
+        aluno.senha = await bcrypt.hash(aluno.senha, 10);
 
-        res.status(201).send(alunoCriado);
+        alunoCriado = await Aluno.create(aluno);
+
+        const token = jwt.sign({alunoId: alunoCriado.id}, authConfig.secret);
+
+        res.status(201).send({
+            aluno: {
+
+                alunoId: alunoCriado.id,
+
+                nome: alunoCriado.nome,
+
+                ra: alunoCriado.ra
+            },
+
+            token
+        });
 
     },
 

@@ -1,6 +1,7 @@
 const Comentario = require("../models/Comentario");
 const Postagem = require("../models/Postagem");
 const { findByPk } = require("../models/Comentario");
+const Aluno = require("../models/Aluno");
 
 
 module.exports = {
@@ -10,9 +11,20 @@ module.exports = {
         const idPostagem = req.params.id;
 
         const comentarioPostagem = await Postagem.findByPk(idPostagem, {
-            include: Comentario,
+            include: {
+                model: Comentario,
+                include: {
+                    model: Aluno,
+                    attributes: ["id", "nome"]}
+            },
+            attributes: [],
+            order: [["created_at", "ASC"]]
             
         });
+
+        if (!comentarioPostagem) {
+            res.status(404).send({error: "A postagem não foi encontrada"});
+        }
 
         res.status(200).send(comentarioPostagem);
 
@@ -37,10 +49,16 @@ module.exports = {
             }
 
             // Cadastro de comentário
-            const comentario = await postagem.createComentario({
-                descricao: descricao,
+            let comentario = await postagem.createComentario({
+                descricao,
                 aluno_id: created_aluno_id,
             });
+
+            comentario = comentario.dataValues;
+
+            comentario.postagem_id = comentario.PostagemId;
+            delete comentario.PostagemId;
+            delete comentario.AlunoId;
     
             res.status(201).send(comentario);
 

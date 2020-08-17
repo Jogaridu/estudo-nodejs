@@ -7,11 +7,20 @@ const routes = express.Router();
 const alunoController = require("./controller/alunoController");
 const postagemController = require("./controller/postagemController");
 const comentarioController = require("./controller/comentarioController");
+const sessaoController = require("./controller/sessaoController");
+const autorizacaoMid = require("./middlewares/autorizacao");
+
+// Rotas públicas
+routes.post("/alunos/cadastrar", alunoController.store);
+
+routes.post("/sessao", sessaoController.store);
+
+routes.use(autorizacaoMid)
 
 // Rota - Alunos
 routes.get("/alunos", alunoController.index);
 routes.get("/alunos/:id", alunoController.buscarPorId);
-routes.post("/alunos/cadastrar", alunoController.store);
+
 
 // Rota - Postagens
 routes.get("/postagens", postagemController.index);

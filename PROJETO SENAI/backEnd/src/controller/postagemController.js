@@ -1,5 +1,6 @@
 const Postagem = require("./../models/Postagem");
 const {Op} = require("sequelize");
+const Aluno = require("../models/Aluno");
 
 
 module.exports = {
@@ -34,7 +35,7 @@ module.exports = {
 
         try {
             
-            const aluno = Aluno.findByPk(created_aluno_id);
+            const aluno = await Aluno.findByPk(created_aluno_id);
 
             if (!aluno) {
                 res.status(404).send("Aluno não encontrado!");
@@ -53,7 +54,7 @@ module.exports = {
         } catch (error) {
             return res
             .status(500)
-            .send({error: "Não foi possível adicionar postagem, tente novamento mais tarde!"})
+            .send({error: "Não foi possível adicionar postagem, tente novamento mais tarde!" + error})
         }
 
     },
