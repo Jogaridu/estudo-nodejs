@@ -32,7 +32,7 @@ export const ImageCropped = styled.div`
         flex-direction: column;
         align-items: flex-start;
 
-        >input {
+        > input {
             width: 100%;
             
         }
