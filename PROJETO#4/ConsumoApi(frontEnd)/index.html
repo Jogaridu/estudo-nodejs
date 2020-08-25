@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consumo API de Games</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div class="container bg-white p-3">
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+              <h1 class="display-4">Bem vindo ao site de games</h1>
+              <p class="lead">Desenvolvido por Jorge Gabriel Ricci Dutra</p>
+            </div>
+          </div>
+        
+        <div id="listCards" class="">
+            <h2>Lista de Jogos</h2>
+            <hr>
+        </div>
+
+        <hr>
+        <h2>Novo jogo</h2>
+        <hr>
+
+        <form class="col-7 m-auto">
+            <div class="form-row">
+
+                <label for="titleEdit">Nome</label>
+                <input type="text" placeholder="Insira o nome do jogo" id="title" class="form-control mb-1" required>
+                
+                <div class="form-group col-md-6">
+                    <label for="priceEdit">Preço</label>
+                    <input type="text" placeholder="Insira o preço do jogo" id="price" class="form-control" required>
+                </div>
+    
+                <div class="form-group col-md-6">
+                    <label for="yearEdit">Ano de lançamento</label>
+                    <input type="text" placeholder="Insira o ano lançado do jogo" id="year" class="form-control" required>
+                </div>
+
+                <button id="btnRegister" class="btn btn-success w-75 m-auto">Cadastrar</button>
+            </div>
+        </form>
+
+        <hr>
+        <h2>Editar jogo</h2>
+        <hr>
+
+        <form class="col-7 m-auto">
+            <div class="form-row">
+
+                <label for="title">ID</label>
+                <input type="text" placeholder="Insira o nome do jogo" id="id" class="form-control mb-1" data-form="edit" required disabled>
+
+                <label for="title">Nome</label>
+                <input type="text" placeholder="Insira o nome do jogo" id="titleEdit" class="form-control mb-1" data-form="edit" required disabled>
+                
+                <div class="form-group col-md-6">
+                    <label for="price">Preço</label>
+                    <input type="text" placeholder="Insira o preço do jogo" id="priceEdit" class="form-control" data-form="edit" required disabled>
+                </div>
+    
+                <div class="form-group col-md-6">
+                    <label for="year">Ano de lançamento</label>
+                    <input type="text" placeholder="Insira o ano lançado do jogo" id="yearEdit" class="form-control" data-form="edit" required disabled>
+                </div>
+
+                <button id="btnUpdate" class="btn btn-success w-75 m-auto">Editar</button>
+            </div>
+        </form>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="./js/jquery.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/index.js" type="module"></script>
+</html>
