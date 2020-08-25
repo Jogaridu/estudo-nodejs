@@ -5,7 +5,14 @@ import { Container, ImageCropped, Form, Titulo, SubTitulo, InputGroup, Button } 
 import Foto from "./../../assets/foto.jpg";
 import {api} from "./../../services/api";
 
+import Alerts from "../../components/Alerts";
+
+import { useHistory } from "react-router-dom";
+import { signIn } from "../../services/security";
+
 const FormLogin = (props) => {
+
+    const history = useHistory();
 
     const [alunoLogin, setAlunoLogin] = useState({
         email: "",
@@ -19,7 +26,10 @@ const FormLogin = (props) => {
             const retorno = await api.post("/sessao", alunoLogin);
 
             if (retorno.status == 201) {
-                alert("Logado com sucesso");
+
+                signIn(retorno.data);
+
+                return history.push("/home");
             }
             
         } catch (erro) {

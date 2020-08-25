@@ -3,9 +3,9 @@ import { createGlobalStyle } from "styled-components";
 export const GlobalStyle = createGlobalStyle`
 :root {
     --primary: #111;
-    --secundary: rgb(25,25,25);
+    --secondary: rgb(25,25,25);
     --white: #D9D9D9;
-    --gray: 7A7A7A;
+    --gray: #7A7A7A;
     --red: #AA0000
 }
 
@@ -52,6 +52,7 @@ button {
     background-color: var(--primary);
     border: 1px solid var(--white);
     transition: 200ms;
+    cursor: pointer;
 
     :active {
         color: var(--gray);

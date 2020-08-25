@@ -27,15 +27,13 @@ module.exports = {
     // insere postagem no banco
     async store(req, res) {
 
-        const token = req.headers.authorization;
-
-        const [Bearer, created_aluno_id] = token.split(" ");
+        const alunoId = req.alunoId;
 
         const {titulo, descricao, imagem, gists} = req.body;
 
         try {
             
-            const aluno = await Aluno.findByPk(created_aluno_id);
+            const aluno = await Aluno.findByPk(alunoId);
 
             if (!aluno) {
                 res.status(404).send("Aluno não encontrado!");
@@ -46,7 +44,7 @@ module.exports = {
                 descricao,
                 imagem,
                 gists,
-                created_aluno_id
+                created_aluno_id: alunoId
             });
 
             res.status(201).send(post);
@@ -62,9 +60,8 @@ module.exports = {
     update() {},
     
     async delete(req, res) {
-        const token = req.headers.authorization;
 
-        const [Bearer, created_aluno_id] = token.split(" ");
+        const alunoId = req.alunoId;
 
         const id = req.params.id;
 
@@ -74,7 +71,7 @@ module.exports = {
             return res.status(404).send({erro: "Aluno não cadastrado"});
         }
 
-        if (postagem.created_aluno_id != created_aluno_id) {
+        if (postagem.created_aluno_id != alunoId) {
             return res.status(401).send("Você não tem permissão para excluir essa postagem");
         }
 

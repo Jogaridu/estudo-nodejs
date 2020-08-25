@@ -1,6 +1,5 @@
 const Comentario = require("../models/Comentario");
 const Postagem = require("../models/Postagem");
-const { findByPk } = require("../models/Comentario");
 const Aluno = require("../models/Aluno");
 
 
@@ -32,9 +31,7 @@ module.exports = {
 
     async store(req, res) {
 
-        const token = req.headers.authorization;
-
-        const [Bearer, created_aluno_id] = token.split(" ");
+        const alunoId = req.alunoId;
 
         const idPostagem = req.params.id;
 
@@ -51,7 +48,7 @@ module.exports = {
             // Cadastro de comentário
             let comentario = await postagem.createComentario({
                 descricao,
-                aluno_id: created_aluno_id,
+                aluno_id: alunoId,
             });
 
             comentario = comentario.dataValues;
