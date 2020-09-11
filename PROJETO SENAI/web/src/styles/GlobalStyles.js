@@ -6,7 +6,9 @@ export const GlobalStyle = createGlobalStyle`
     --secondary: rgb(25,25,25);
     --white: #D9D9D9;
     --gray: #7A7A7A;
-    --red: #AA0000
+    --red: #AA0000;
+    --alertErro: #AA0000DD;
+    --alertSucesso: #00AA00DD;
 }
 
 * {
@@ -17,7 +19,8 @@ export const GlobalStyle = createGlobalStyle`
 
 body {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    background-color: var(--primary)
+    background-color: var(--primary);
+    overflow-x: hidden;
 }
 
 input {
@@ -32,7 +35,8 @@ input {
 }
 
 input:hover,
-button:hover {
+button:hover,
+textarea {
     background-color: var(--red);
     transition: 200ms;
 }
@@ -59,5 +63,17 @@ button {
         border: 1px solid var(--gray);
         
     }
+}
+
+textarea {
+    color: var(--white);
+    background-color: var(--secundary);
+    font-size: 16px;
+    border: 1px solid var(--white);
+    padding: 10px;
+    font-weight: bold;
+    height: 30px;
+    transition: 200ms;
+    resize: none;
 }
 `;

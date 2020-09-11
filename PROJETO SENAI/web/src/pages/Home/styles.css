@@ -80,11 +80,18 @@
     font-size: 25px;
 }
 
-.profile a {
+.profile label {
     color: var(--gray);
     margin-top: 5px;
     font-size: 15px;
     text-decoration: none;
+    letter-spacing: 0px;
+    cursor: pointer;
+    transition: 200ms;
+}
+
+.profile label:hover {
+    color: var(--red);
 }
 
 .feed {
@@ -92,6 +99,7 @@
     width: 100%;
     display: flex;
     overflow-y: scroll;
+    flex-direction: column;
 }
 
 .card-post {
@@ -162,9 +170,22 @@
 
 }
 
+.card-post .footer p{
+    margin-top: 5px;
+
+}
+
 .card-post .footer h1 {
     font-size: 16px;
     font-weight: 500;
+
+    cursor: pointer;
+
+    transition: 200ms;
+}
+
+.card-post .footer h1:hover {
+    color: var(--red)
 }
 
 .card-post .footer .containerComentarios {
@@ -187,3 +208,74 @@
     align-items: center;
 }
 
+.card-post .footer .novoComentario {
+    width: 100%;
+    margin-top: 5px;
+
+    display: flex;
+}
+
+.card-post .footer .novoComentario textarea {
+    flex: 1;
+    height: 30px;
+}
+
+.novaPostagem {
+    width: 600px;
+    height: fit-content;
+    padding: 10px;
+
+    background-color: var(--primary);
+    border-radius: 6px;
+
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.novaPostagem h1 {
+    color: var(--white);
+    font-weight: 500;
+    text-align: center;
+}
+
+.novaPostagem label {
+    margin-top: 10px;
+}
+
+.novaPostagem textarea {
+    height: 100px;
+}
+
+.novaPostagem em {
+    font-size: 14px;
+    font-style: normal;
+}
+
+.novaPostagem input[type=file] {
+    display: none;
+}
+
+.novaPostagem span {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-right: 10px;
+
+    font-size: 30px;
+    color: var(--white);
+    cursor: pointer;
+
+    transition: 200ms;
+}
+
+.novaPostagem span:hover {
+    color: var(--red)
+}
+
+.actions {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
